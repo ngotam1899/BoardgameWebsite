@@ -1,0 +1,13 @@
+.product_description_area .tab-content .total_rate .rating_list .list li a i.disabled,
+.review_item .media .media-body i.disabled,
+.review_box i.disabled{
+    color: antiquewhite;
+}
+
+.review_box #star-list a{
+    color: #fbd600;
+}
+
+.img-cart{
+    height: 20vh;
+}

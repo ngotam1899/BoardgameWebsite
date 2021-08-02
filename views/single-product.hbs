@@ -1,0 +1,427 @@
+<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="blog">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Shop Single</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Shop Single</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+
+  <!--================Single Product Area =================-->
+	{{#with product}}
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="owl-carousel owl-theme s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{imagepath}}" alt="">
+						</div>
+						<!-- <div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div>
+						<div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div> -->
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{name}}</h3>
+						<h2>${{price}}</h2>
+						<ul class="list">
+							<li><a class="active" href="#"><span>{{Category.name}}</span> : Household</a></li>
+							<li><a href="#"><span>Availibility</span> :{{#if availibility}} In Stock{{else}} Out of stock{{/if}}</a></li>
+						</ul>
+						<p>{{summary}}</p>
+						<div class="product_count">
+              <label for="qty">Quantity:</label>
+              <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
+							<input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty" readonly>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+               class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
+							<a class="button primary-btn add-to-cart text-white" data-id={{id}}>Add to Cart</a>               
+						</div>
+						<div class="card_area d-flex align-items-center">
+							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
+							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--================End Single Product Area =================-->
+
+	<!--================Product Description Area =================-->
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Description</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+					 aria-selected="false">Specification</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+					 aria-selected="false">Comments</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					 aria-selected="false">Reviews</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<p>{{{description}}}</p>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+								{{#each ProductSpecifications}}
+								<tr>
+									<td>
+										<h5>{{Specification.name}}</h5>
+									</td>
+									<td>
+										<h5>{{description}}</h5>
+									</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="comment_list">
+								{{#each Comments}}
+									<div class="review_item">
+										<div class="media">
+											<div class="d-flex">
+												<img src="{{User.avatarPath}}" alt="">
+											</div>
+											<div class="media-body">
+												<h4>{{User.fullname}}</h4>
+												<h5>{{createdAt}}</h5>
+												<a class="reply_btn" onclick="showReply({{id}}, '{{User.fullname}}')">Reply</a>
+											</div>
+										</div>
+										<p>{{message}}</p>
+									</div>
+								
+									{{#each SubComments}}
+									<div class="review_item reply">
+										<div class="media">
+											<div class="d-flex">
+												<img src="{{User.avatarPath}}" alt="">
+											</div>
+											<div class="media-body">
+												<h4>{{User.fullname}}</h4>
+												<h5>{{createdAt}}</h5>
+												<a class="reply_btn" onclick="showReply({{../id}}, '{{User.fullname}}')">Reply</a>
+											</div>
+										</div>
+										<p>{{message}}</p>
+									</div>
+									{{/each}}
+								{{/each}}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="review_box">
+								{{#if ../isLoggedIn}}
+								<h4>Post a comment</h4>
+								<form action="/comments" class="form-contact form-review mt-3" method="POST">
+									<div class="form-group form-inline">
+										<button type="button" class="close" onclick="removeReply()">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<label id="reply" class="font-italic ml-2"></label>
+                    <input class="form-control" name="productId" id="productId" type="hidden" value="{{id}}">
+										<input class="form-control" name="parentCommentId" id="parentCommentId" type="hidden" value="">
+                  </div>
+									<div class="form-group">
+                    <textarea class="form-control different-control w-100" name="message" cols="30" rows="5" placeholder="Enter Message"></textarea>
+                  </div>
+                  <div class="form-group text-center text-md-right mt-3">
+                    <button type="submit" class="button button--active button-review">Submit Now</button>
+                  </div>
+								</form>
+								{{else}}
+								<h4>Please login to post a comment! <a href="/users/login?returnURL=/products/{{id}}">Click here to login</a></h4>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="row total_rate">
+								<div class="col-6">
+		
+									<div class="box_total">
+										<h5>Overall</h5>
+										<h4>{{overallReview}}</h4> <!--2 biến này đã được lưu ở đâu đó?-->
+										<h6>({{reviewCount}} Reviews)</h6>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="rating_list">
+										<h3>Based on {{reviewCount}} Reviews</h3>
+										{{{ createStarList stars }}}
+									</div>
+								</div>
+							</div>
+							<div class="">
+								{{#each Reviews}}
+								<div class="review_item">
+									<div class="media">
+										<div class="d-flex">
+											<img src="{{User.avatarPath}}" alt="">
+										</div>
+										<div class="media-body">
+											<h4>{{User.fullname}}</h4>
+											{{{ createStar rating }}}
+										</div>
+									</div>
+									<p>{{message}}</p>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="review_box">
+								{{#if ../isLoggedIn}}
+								<h4>Add a Review</h4>
+								<p>Your Rating:</p>
+								<ul class="list" id="star-list">
+									<li><a><i class="fa fa-star"></i></a></li>
+									<li><a><i class="fa fa-star"></i></a></li>
+									<li><a><i class="fa fa-star"></i></a></li>
+									<li><a><i class="fa fa-star"></i></a></li>
+									<li><a><i class="fa fa-star"></i></a></li>
+								</ul>
+								<p id="starName" class="font-italic"></p>
+                <form action="/reviews" method="POST" class="form-contact form-review mt-3">
+                  <div class="form-group">
+										<input type="hidden" name="productId" value="{{id}}">
+										<input type="hidden" name="rating" id="rating" value="{{../userReview.rating}}">
+									</div>
+									<div class="form-group">
+                    <textarea class="form-control different-control w-100" name="messageReview" cols="30" rows="5" placeholder="Enter Message">{{../userReview.message}}</textarea>
+                  </div>
+                  <div class="form-group text-center text-md-right mt-3">
+                    <button type="submit" class="button button--active button-review">Submit Now</button>
+                  </div>
+                </form>
+								{{else}}
+								<h4>Please login to post a comment! <a href="/users/login?returnURL=/products/{{id}}">Click here to login</a></h4>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{/with}}
+	<!--================End Product Description Area =================-->
+
+	<!--================ Start related Product area =================-->  
+	<section class="related-product-area section-margin--small mt-0">
+		<div class="container">
+			<div class="section-intro pb-60px">
+        <p>Popular Item in the market</p>
+        <h2>Top <span class="section-intro__style">Product</span></h2>
+      </div>
+			<div class="row mt-30">
+        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+          <div class="single-search-product-wrapper">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+              <div class="desc">
+                  <a href="#" class="title">Gray Coffee Cup</a>
+                  <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+          <div class="single-search-product-wrapper">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
+              <div class="desc">
+                  <a href="#" class="title">Gray Coffee Cup</a>
+                  <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+          <div class="single-search-product-wrapper">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
+              <div class="desc">
+                  <a href="#" class="title">Gray Coffee Cup</a>
+                  <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+          <div class="single-search-product-wrapper">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+              <div class="desc">
+                  <a href="#" class="title">Gray Coffee Cup</a>
+                  <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">Gray Coffee Cup</a>
+                <div class="price">$170.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+		</div>
+	</section>
+	<!--================ end related Product area =================-->  	
+	<script>
+		// lần đầu load trang web hidden button close label Reply
+		$(document).ready(()=>{
+			resetStars();
+			$('.close').hide();
+			$('#star-list i').on('click', checkStars);
+
+			// Tạo hiệu ứng Hover
+			$('#star-list i').on('mouseover', highlightStars);
+			$('#star-list i').on('mouseout', resetStars);
+		})
+		// hiển thị thông tin của comment cha
+		function showReply(parentCommentId, fullname) {
+			$('.close').show()
+			$('#reply').html('Reply '+ fullname);
+			$('#parentCommentId').val(parentCommentId);
+		}
+		// xóa thông tin comment
+		function removeReply(){
+			$('.close').hide()
+			$('#reply').html(null);
+			$('#parentCommentId').val('');
+		}
+		function checkStars(){
+			let rating = getRating(this);
+			showStars(rating)
+			$('#rating').val(rating);				// lưu lại giá trị rating
+		}
+
+		function highlightStars(){
+			let rating = getRating(this);
+			showStars(rating)
+		}
+
+		function resetStars(){
+			let rating = $('#rating').val();
+			showStars(rating)
+		}
+
+		function getRating(star){
+			let stars = $('#star-list i');
+			let i;
+			for(i=0; i<5; i++){
+				if($(stars[i]).get(0) == star){	// star thứ i đang được chọn
+					return i+1;								// gán giá trị rating
+				}
+			}
+			return i;
+		}
+
+		function showStars(rating){
+			let stars = $('#star-list i');
+			// thêm class disable vào
+			for(let i=0; i<5; i++){
+				$(stars[i]).removeClass('disabled');
+			}
+			for(let i=rating; i<5; i++){
+				$(stars[i]).addClass('disabled')
+			}
+
+			// tạo 5 cấp độ cho star
+			let starNames = ['Please rating this product!','Worst', 'Bad', 'OK', 'Good', 'Outstanding']
+			$('#starName').html(starNames[rating])
+		}
+	</script>

@@ -1,0 +1,334 @@
+<script src="/vendors/nouislider/nouislider.min.js"></script>
+
+
+
+{{> banner}}
+
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="sidebar-categories">
+          <div class="head">Browse Categories</div>
+          <ul class="main-categories">
+
+            <li class="common-filter">
+              <form action="#">
+                <ul>
+                  {{#each categories}}
+                  <li class="filter-list"><input class="pixel-radio" type="radio" id="category{{id}}" name="category">
+                    <label for="category{{id}}" onclick="selectParam('category',{{id}},true)">{{name}}<span>
+                        ({{Products.length}})</span>
+                    </label>
+                  </li>
+                  {{/each}}
+                </ul>
+              </form>
+            </li>
+
+          </ul>
+        </div>
+        <div class="sidebar-filter">
+          <div class="top-filter-head">Product Filters</div>
+          <div class="common-filter">
+            <div class="head">Brands</div>
+            <form action="#">
+              <ul>
+                {{#each brands}}
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="brand{{id}}" name="brand">
+                  <label for="brand{{id}}" onclick="selectParam('brand',{{id}})">{{name}}<span>
+                      ({{Products.length}})</span></label></li>
+                {{/each}}
+              </ul>
+            </form>
+          </div>
+          <div class="common-filter">
+            <div class="head">Color</div>
+            <form action="#">
+              <ul>
+                {{#each colors}}
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="color{{id}}" name="color">
+                  <label for="color{{id}}" onclick="selectParam('color',{{id}})">{{name}}<span>
+                      ({{ProductColors.length}})</span></label></li>
+                {{/each}}
+              </ul>
+            </form>
+          </div>
+          <div class="common-filter">
+            <div class="head">Price</div>
+            <div class="price-range-area">
+              <div id="price-range"></div>
+              <div class="value-wrapper d-flex">
+                <div class="price">Price:</div>
+                <span>$</span>
+                <div id="lower-value"></div>
+                <div class="to">to</div>
+                <span>$</span>
+                <div id="upper-value"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 col-md-7">
+        <!-- Start Filter Bar -->
+        <div class="filter-bar d-flex flex-wrap align-items-center">
+          <div class="sorting">
+            <select id="sort" onchange="selectParam('sort',this.value)">
+              <option value="name">Sắp xếp theo tên</option>
+              <option value="price">Sắp xếp theo giá từ thấp đến cao</option>
+              <option value="overallReview">Sắp xếp theo lượt review từ cao xuống thấp</option>
+            </select>
+          </div>
+          <div class="sorting mr-auto">
+            <select id="limit" onchange="selectParam('limit',this.value)">
+              <option value="6">Show 6</option>
+              <option value="9">Show 9</option>
+              <option value="12">Show 12</option>
+            </select>
+          </div>
+          <form action="/products" method="GET">
+            <div class="input-group filter-bar-search">
+              <input type="text" name="search" placeholder="Search">
+              <div class="input-group-append">
+                <button type="submit"><i class="ti-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- End Filter Bar -->
+        <!-- Start Best Seller -->
+        <section class="lattest-product-area pb-40 category-list">
+          <div class="row">
+            {{#each products}}
+            <div class="col-md-6 col-lg-4">
+              {{>product}}
+            </div>
+            {{/each}}
+          </div>
+          <div class="row justify-content-center">
+            <nav id="pagination">
+              {{{createPagination pagination paginationClass="pagination" }}}
+            </nav>
+          </div>
+
+        </section>
+        <!-- End Best Seller -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ category section end ================= -->
+
+<!-- ================ top product area start ================= -->
+<section class="related-product-area">
+  <div class="container">
+    <div class="section-intro pb-60px">
+      <p>Popular Item in the market</p>
+      <h2>Top <span class="section-intro__style">Product</span></h2>
+    </div>
+    <div class="row mt-30">
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ top product area end ================= -->
+
+<!-- ================ Subscribe section start ================= -->
+<section class="subscribe-position">
+  <div class="container">
+    <div class="subscribe text-center">
+      <h3 class="subscribe__title">Get Update From Anywhere</h3>
+      <p>Bearing Void gathering light light his eavening unto dont afraid</p>
+      <div id="mc_embed_signup">
+        <form target="_blank"
+          action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+          method="get" class="subscribe-form form-inline mt-5 pt-1">
+          <div class="form-group ml-sm-auto">
+            <input class="form-control mb-1" type="email" name="EMAIL" placeholder="Enter your email"
+              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '">
+            <div class="info"></div>
+          </div>
+          <button class="button button-subscribe mr-auto mb-1" type="submit">Subscribe Now</button>
+          <div style="position: absolute; left: -5000px;">
+            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ================ Subscribe section end ================= -->
+<script>
+  //giữ lại địa chỉ sort (sort cùng lúc category, brand, color)
+  let ulrparams = new URLSearchParams(location.search);
+  let params = {
+    //khởi tạo mặc định
+    category: 0,
+    brand: 0,
+    color: 0,
+    min: 0,
+    max: 100,
+    limit: 9,
+    page: 1,
+    sort: 'name',
+    search: ''
+  };
+  //vòng lặp đảm bảo category, brand, color luôn xuất hiện, cái nào ko có thì set mặc định
+  for (let key in params) {
+    if (!ulrparams.has(key)) {
+      ulrparams.append(key, params[key]);
+    }
+  }
+  $(document).ready(() => {
+    //lưu lại control do người dùng click vào
+    //thiết lập trạng thái cho các checkbox của browse và filter
+    let checkbox = ['category', 'brand', 'color'];
+    for (let key of checkbox) {
+      let control = $(`#${key}${ulrparams.get(key)}`);
+      if (control) {
+        $(control).prop(`checked`, true);
+      }
+    }
+    
+    //lưu lại sort và limit do người dùng click vào
+    //thiết lập trạng thái cho combobox:  search và limit
+    $('#sort').val(ulrparams.get('sort'));  //set theo id="sort"
+    $('#limit').val(ulrparams.get('limit'));  //id="limit"
+    
+    //gán tên class cho thanh phân trang để sử dụng mẫu bootstrap mặc định (set id="pagination để gọi")
+    //thiết lập trang thái và href cho phân trang
+    $('#pagination li').addClass('page-item');
+    $('#pagination li a').addClass('page-link');
+    
+    //biến savePage để lưu lại số page cũ mỗi khi load lại trang
+    let savePage = ulrparams.get('page');
+    $('#pagination li a').each((index, item) => {
+      // href="/products?page=2"
+      // lấy ra số 2 (page)
+      let page = $(item).attr('href').split('=')[1];
+      ulrparams.set('page', page);
+      let href = '/products?' + ulrparams.toString();
+      $(item).attr('href', href);
+    });
+    ulrparams.set('page', savePage);
+  });
+
+  //cho ta lấy các tham số trong đường URL 
+  //do category là option dạng browse nên phải reset
+  function selectParam(key, value, reret = false) {
+    if (reret) {
+      for (let key in params) {
+        ulrparams.set(key, params[key]); //chạy đảm bảo
+      }
+    }
+    ulrparams.set(key, value);
+    let url = `/products?${ulrparams.toString()}`;
+    location.href = url;
+  }
+</script>
